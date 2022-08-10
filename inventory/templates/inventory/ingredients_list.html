@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %} 
+{% block title %}Django Delights{% endblock %}
+{% block head %}
+{% endblock %}
+{% block content %}
+<div class="ing-list">
+    <h2>Ingredients</h2>
+    <a class="add-link" href="{% url 'add_ingredient' %} ">Add New Ingredient to Inventory</a>
+
+    <hr/>
+
+    <div class="container-ing">
+        <div class="inventory-table">
+            
+                <div>Name</div>
+                <div>Quantity</div>
+                <div>Unit</div>
+                <div>Unit Price</div>
+            </div>
+  
+        {% for ingredient in object_list %}
+            <div class="inventory">
+                <div><a href="{% url "update_ingredient" ingredient.id %}">{{ ingredient.name }}</a>
+                </div>
+
+                <div>{{ ingredient.quantity }}</div>
+                <div>{{ ingredient.unit }}</div>
+                <div class="price">${{ ingredient.price_per_unit|stringformat:".2f" }}</div>
+            </div>
+            
+        {% endfor %}
+    
+    </div>
+</div>
+{% endblock %}

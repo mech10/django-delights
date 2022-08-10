@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load static %} 
+{% block content %}
+<div class="insider-links">
+    <h2>Update Ingredient in Inventory</h2>
+    <form method="post" class="flex-form">
+        {% csrf_token %}
+        {{ form.as_table }}
+        <input class="submit" type="submit" value="Update"/>
+    </form>
+{% endblock %}
+</div>

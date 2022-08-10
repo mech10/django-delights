@@ -1,0 +1,73 @@
+{% load static %} 
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <!-- <link rel="apple-touch-icon" sizes="180x180" href="{% static 'apple-touch-icon.png' %}"> -->
+<link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon-32x32.png' %}">
+<!-- <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon-16x16.png' %}"> -->
+<link rel="manifest" href="{% static 'site.webmanifest' %}">
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lobster&family=Montserrat&display=swap" rel="stylesheet"> 
+  
+  <link rel="stylesheet" type="text/css" href="{% static 'inventory/style.css' %}" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet"> 
+  <title>{% block title %}Django Delights{% endblock %}</title>
+  {% block head %}{% endblock %}
+</head>
+<body>
+  <div class="grid">
+    <div class="grid__line grid__line--first"></div>
+    <div class="grid__line grid__line--even"></div>
+    <div class="grid__line"></div>
+    <div class="grid__line grid__line--even"></div>
+    <div class="grid__line"></div>
+    <div class="grid__line grid__line--even"></div>
+    <div class="grid__line grid__line--last"></div>
+  </div>
+  <div class="app">
+  <header>
+  
+    <div class="header-first-row">
+      <a class="title" href="{% url 'home' %}">Django Delights</a>
+      {% if user.is_authenticated %}
+      <a class="logout" href="/logout">Logout</a>
+      {% endif %}
+    </div>
+ 
+    {% if user.is_authenticated %}
+      <p>Hi, {{ user.username }}!</p>
+      <nav class="navbar">
+        <ul class="nav-menu">
+          <li class="nav-item">
+
+        {% url 'home' as home_url %}
+        {% url 'ingredients' as ingredients_url %}
+        {% url 'menu' as menu_url %}
+        {% url 'purchases' as purchases_url %}
+        {% url 'reports' as reports_url %}
+        <a class="nav-link{% if request.path == home_url %} current-page{% endif %}" href="{% url 'home' %}">Home</a></li>
+        <li class="nav-item">
+        <a class="nav-link{% if request.path == ingredients_url %} current-page{% endif %}" href="{% url 'ingredients' %}">Ingredients</a></li>
+        <li class="nav-item">
+        <a class="nav-link{% if request.path == menu_url %} current-page{% endif %}" href="{% url 'menu' %}">Menu</a></li>
+        <li class="nav-item">
+        <a class="nav-link{% if request.path == purchases_url %} current-page{% endif %}" href="{% url 'purchases' %}">Purchases</a></li>
+        <li class="nav-item">
+        <a class="nav-link{% if request.path == reports_url %} current-page{% endif %}" href="{% url 'reports' %}">Reports</a></li>
+      </ul>
+      </nav>
+    {% endif %}
+ 
+  </header>
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+  </div>
+</body>
+</html>

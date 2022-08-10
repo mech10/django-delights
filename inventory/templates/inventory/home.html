@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load static %} 
+{% block title %}Django Delights{% endblock %}
+{% block content %}
+    <div class="home">
+        <h2>Ingredients</h2>
+        <div class="container-ing">
+            
+            <div class="inventory-table">
+                
+                    
+                        <div>Name</div>
+                        <div>Quantity</div>
+                        <div>Unit</div>
+                        <div>Unit Price</div>
+    
+            </div>
+                {% for ingredient in ingredients %}
+                    <div class="inventory">
+                        <div>{{ ingredient.name }}</div>
+                        <div>{{ ingredient.quantity }}</div>
+                        <div>{{ ingredient.unit }}</div>
+                        <div class="price">${{ ingredient.price_per_unit|stringformat:".2f" }}</div>
+                    </div>
+                {% endfor %}
+            
+            
+        </div>
+
+        <hr/>
+
+        <div class="container-purchase">
+            <h2>Purchases</h2>
+            <div class="inventory-table-2">
+                
+                  
+                        <div>Menu Item</div>
+                        <div>Price</div>
+                        <div>Time</div>
+                  
+                
+            </div>
+                {% for purchase in purchases %}
+                    <div class="purchase">
+                        <div>{{ purchase.menu_item.title }}</div>
+                        <div class="price">${{ purchase.menu_item.price|stringformat:".2f" }}</div>
+                        <div>{{ purchase.timestamp }}</div>
+                    </div>
+                {% endfor %}
+                
+           
+        </div>
+
+        <hr/>
+   <div class="container-menu">
+        <h2>Menu</h2>
+
+        
+          
+            {% for menu_item in menu_items %}
+            <div class="menu-items">
+                <div>
+                {{ menu_item.title|ljust:"50" }}
+            </div>
+            <div>
+                ${{ menu_item.price|stringformat:".2f" }}
+            </div>
+            
+            </div>
+
+
+                {% for recipe_requirement in menu_item.reciperequirement_set.all %}
+                
+                <div class="menu-ingredients">
+                <div>{{ recipe_requirement.quantity }}</div> <div>{{recipe_requirement.ingredient.unit }}</div> <div>{{ recipe_requirement.ingredient.name }}</div>
+            </div>
+                {% endfor %}
+            
+     
+            {% endfor %}
+        </div>
+
+          
+
+
+        
+       
+    </div>
+{% endblock %}

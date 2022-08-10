@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %} 
+{% block content %}
+<div class="insider-links">
+    <h2>Add Ingredient to Inventory</h2>
+   <div class="form-data">
+    <form method="post">
+   
+    {% csrf_token %}
+    {{ form.as_table}}
+    
+    <input class="submit" type="submit" value="Submit"/>
+   
+    </form>
+</div>
+{% endblock %}
+</div>

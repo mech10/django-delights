@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %} 
+{% block content %}
+<div class="insider-links">
+    <h2>Add Item to Menu</h2>
+    <form action="" method="POST">
+    <div>
+       
+    {% csrf_token %}
+    {{ form.as_table }}
+    <input class="submit" type="submit" value="Submit"/>
+    </div>
+    </form>
+{% endblock %}
+</div>
